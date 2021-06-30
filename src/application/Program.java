@@ -1,21 +1,33 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
+		List<Integer> myInts = Arrays.asList(1, 2, 3, 4);
+		List<Double> myDoubles = Arrays.asList(3.14, 6.28);
 		List<Object> myObjs = new ArrayList<Object>();
-		myObjs.add(10);
-		myObjs.add(5);
 		
-		List<? super Number> myNums = myObjs;	// Contravariância
-		
-		myNums.add(10);							// put - OK
-		myNums.add(3.14);
-		
-		Number x = myNums.get(0);				// get - ERROR
+		copy(myInts, myObjs);				// União de covariância
+		printList(myObjs);					// e contravariância
+		copy(myDoubles, myObjs);
+		printList(myObjs);
+	}
+	
+	public static void copy(List<? extends Number> source, List<? super Number> destiny) {
+		for (Number number : source) {
+			destiny.add(number);
+		}
+	}
+	
+	public static void printList(List<?> list) {
+		for (Object obj : list) {
+			System.out.print(obj + " ");
+		}
+		System.out.println();
 	}
 }
