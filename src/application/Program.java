@@ -7,14 +7,15 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-		List<Integer> intList = new ArrayList<Integer>();
-		intList.add(10);
-		intList.add(5);
+		List<Object> myObjs = new ArrayList<Object>();
+		myObjs.add(10);
+		myObjs.add(5);
 		
-		List<? extends Number> list = intList;    // Covariância
+		List<? super Number> myNums = myObjs;	// Contravariância
 		
-		Number x = list.get(0);					  // get - OK
+		myNums.add(10);							// put - OK
+		myNums.add(3.14);
 		
-		list.add(20);							  // put - ERROR
+		Number x = myNums.get(0);				// get - ERROR
 	}
 }
