@@ -3,30 +3,18 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.Circle;
-import entities.Rectangle;
-import entities.Shape;
-
 public class Program {
 
 	public static void main(String[] args) {
-
-		List<Shape> myShapes = new ArrayList<>();
-		myShapes.add(new Rectangle(3.0, 2.0));
-		myShapes.add(new Circle(2.0));
 		
-		List<Circle> myCircles = new ArrayList<>();
-		myCircles.add(new Circle(2.0));
-		myCircles.add(new Circle(3.0));
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(10);
+		intList.add(5);
 		
-		System.out.println("Total area: " + totalArea(myCircles));
-	}
-	
-	public static double totalArea(List<? extends Shape> list) {   // Solução imprópria
-		double sum = 0.0;										   // Não há a possibilidade de adicionar 
-		for(Shape s : list) {									   // dados à lista
-			sum += s.area();
-		}
-		return sum;
+		List<? extends Number> list = intList;    // Covariância
+		
+		Number x = list.get(0);					  // get - OK
+		
+		list.add(20);							  // put - ERROR
 	}
 }
